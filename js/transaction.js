@@ -28,8 +28,7 @@ const makeTransaction = transaction => {
       const canProcess = Math.random() > 0.3;
 
       if (canProcess) {
-        resolve(transaction.id, delay); //?! Почему delay корректно передает число, а time принимает undefined?
-        console.log('delay:', delay); // число
+        resolve([transaction.id, delay]);
       } else {
         reject(transaction.id);
       }
@@ -37,9 +36,8 @@ const makeTransaction = transaction => {
   });
 };
 
-const logSuccess = (id, time) => {
-  console.log('time:', time); // undefined
-  console.log(`Transaction ${id} processed in ${time}ms`); //! Почему-то time (delay) - undefined
+const logSuccess = ([id, time]) => {
+  console.log(`Transaction ${id} processed in ${time}ms`);
 };
 
 const logError = id => {
